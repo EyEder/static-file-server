@@ -1,15 +1,18 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('../webpack.config');
+var express = require('express');
+var path = require('path');
+const app = express();
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+const fs = require('fs');
 
-  console.log('Listening at http://localhost:3000/');
+app.get('/', (req, res) => {
+	fs.readdir('../src', (err, files) => {
+		files.forEach((file) => {
+			console.log(file);
+		});
+	});
+	res.end();
+});
+
+app.listen(3000,function(){
+	console.log('listening at port 3000');
 });
