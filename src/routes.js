@@ -1,6 +1,16 @@
-var express = require('express');
-var router = express.Router();
+var ReactDOMServer = require('react-dom/server');
+var React = require('react');
 
-router.get('/', (req, res, next) => {
-	res.render('home');
-});
+import Home from './components/Home.js';
+
+// var Home = React.createFactory(require('./components/Home'));
+
+module.exports = {
+	home: function(req, res){
+		var markup = ReactDOMServer.renderToString(<Home />);
+
+		res.render('home', {
+			markup: markup
+		});
+	}
+}
