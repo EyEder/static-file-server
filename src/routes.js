@@ -1,11 +1,13 @@
 var ReactDOMServer = require('react-dom/server');
 var React = require('react');
+var fs = require('fs');
 
 import Home from './components/Home.js';	//not use '''var Home = require('./components.Home')'''
 
 module.exports = {
 	home: function(req, res){
-		var markup = ReactDOMServer.renderToString(<Home />);		//renderToString receives a ReactElement not a React Component
+		var fileList = fs.readdirSync(__dirname);
+		var markup = ReactDOMServer.renderToString(<Home fileList={fileList}/>);		//renderToString receives a ReactElement not a React Component
 
 		res.render('home', {
 			markup: markup
