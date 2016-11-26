@@ -6,7 +6,7 @@ import Home from './components/Home.js';	//not use '''var Home = require('./comp
 
 module.exports = {
 	home: function(req, res){
-		var fileList = fs.readdirSync(__dirname);
+		var fileList = fs.readdirSync(__dirname);	//use sync to get the file list 
 		var markup = ReactDOMServer.renderToString(<Home fileList={fileList}/>);		//renderToString receives a ReactElement not a React Component
 
 		res.render('home', {
