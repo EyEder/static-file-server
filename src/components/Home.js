@@ -8,7 +8,9 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>good luck, Mokey!</h1>
+				<p id='file-name'>file name</p>
+				<p>details</p>
+				<button>download</button>
 			</div>
 			);
 	}

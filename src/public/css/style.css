@@ -1,0 +1,10 @@
+#file-name {
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+	border-bottom: 1px solid #999;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+}

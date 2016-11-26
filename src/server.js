@@ -9,6 +9,8 @@ var routes = require('./routes');
 
 const app = express();
 
+app.use('/', express.static(path.join(__dirname, 'public')));
+
 app.engine('handlebars', exphbs(
 	// {defaultLayout: 'main'}
 	));
