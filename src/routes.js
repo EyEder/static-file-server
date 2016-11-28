@@ -12,5 +12,8 @@ module.exports = {
 		res.render('home', {
 			markup: markup
 		});
+	},
+	upload: function(req, res){
+		res.render('upload');
 	}
 }

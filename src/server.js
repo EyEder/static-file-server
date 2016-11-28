@@ -18,6 +18,8 @@ app.set('view engine', 'handlebars');
 
 app.get('/', routes.home);
 
+app.post('/upload', routes.upload);
+
 app.listen(3000,function(){
 	console.log('listening at port 3000');
 });

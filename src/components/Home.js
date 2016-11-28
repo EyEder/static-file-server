@@ -1,4 +1,5 @@
 var React = require('react');
+import UploadFile from './UploadFile.js';
 
 class Home extends React.Component {
 	constructor(props){
@@ -17,7 +18,10 @@ class Home extends React.Component {
 		});
 		return (
 			<div>
-				{fileList}		
+				<UploadFile />
+				<div>
+					{fileList}		
+				</div>
 			</div>
 		);
 	}
