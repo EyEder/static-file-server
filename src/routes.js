@@ -1,6 +1,9 @@
 var ReactDOMServer = require('react-dom/server');
 var React = require('react');
 var fs = require('fs');
+var formidable = require('formidable'),
+    http = require('http'),
+    util = require('util');
 
 import Home from './components/Home.js';	//not use '''var Home = require('./components.Home')'''
 
@@ -15,8 +18,16 @@ module.exports = {
 	},
 	upload: function(req, res){
 
-		
-		
-		res.render('upload');
+		if(req.url == '/upload' && req.method.toLowerCase() == 'post'){
+			var form = new formidable.IncomingForm();
+			form.parse(req, function(err, fields, files) {
+	      res.writeHead(200, {'content-type': 'text/plain'});
+	      res.write('received upload:\n\n');
+	      res.end(util.inspect({fields: fields, files: files}));
+	    });
+			return;
+		}
+
+		// res.render('upload');
 	}
 }
