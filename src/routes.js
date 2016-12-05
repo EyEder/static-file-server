@@ -4,8 +4,9 @@ var fs = require('fs');
 var formidable = require('formidable'),
     http = require('http'),
     util = require('util');
-// var hiredis = require('hiredis'),
-		// reader = new hiredis.Reader({return_buffers: true});
+var redis = require('redis'),
+		client = redis.createClient();
+		
 
 import Home from './components/Home.js';	//not use '''var Home = require('./components.Home')'''
 
@@ -26,11 +27,12 @@ module.exports = {
 	      res.writeHead(200, {'content-type': 'text/plain'});
 	      res.write('received upload:\n\n');
 	      res.write(util.inspect({fields: fields, files: files}));
-	      // reader.feed(files);
-	      // res.end(reader.get());
 	      fs.readFile(files.upload.path,(err, data) => {
 	      	if(err) throw err;
-	      	console.log(data);
+	      	client.set(files.upload.name, data);
+	      	client.get('asd.jpg',function(err, data){
+	      		console.log(data.toString());
+	      	});
 	      });
 	      res.end();
 	    });
