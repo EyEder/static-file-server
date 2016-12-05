@@ -4,6 +4,8 @@ var fs = require('fs');
 var formidable = require('formidable'),
     http = require('http'),
     util = require('util');
+// var hiredis = require('hiredis'),
+		// reader = new hiredis.Reader({return_buffers: true});
 
 import Home from './components/Home.js';	//not use '''var Home = require('./components.Home')'''
 
@@ -20,10 +22,17 @@ module.exports = {
 
 		if(req.url == '/upload' && req.method.toLowerCase() == 'post'){
 			var form = new formidable.IncomingForm();
-			form.parse(req, function(err, fields, files) {
+			form.parse(req, (err, fields, files) => {
 	      res.writeHead(200, {'content-type': 'text/plain'});
 	      res.write('received upload:\n\n');
-	      res.end(util.inspect({fields: fields, files: files}));
+	      res.write(util.inspect({fields: fields, files: files}));
+	      // reader.feed(files);
+	      // res.end(reader.get());
+	      fs.readFile(files.upload.path,(err, data) => {
+	      	if(err) throw err;
+	      	console.log(data);
+	      });
+	      res.end();
 	    });
 			return;
 		}
