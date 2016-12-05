@@ -25,6 +25,8 @@ app.get('/', routes.home);
 
 app.post('/upload', routes.upload);
 
+app.get('/download', routes.download);
+
 app.listen(3000,function(){
 	console.log('listening at port 3000');
 });

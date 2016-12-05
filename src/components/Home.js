@@ -7,12 +7,13 @@ class Home extends React.Component {
 	}
 
 	render() {
+		var dir = this.props.dir;
 		var fileList = this.props.fileList.map((file, index) => {
 			return (
 				<div>
 					<p id='file-name'>{file}</p>
 					<p>details</p>
-					<button>download</button>
+					<button><a href={'/download' + dir + '/' + file}>download</a></button>
 				</div>
 			);
 		});

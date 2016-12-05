@@ -12,8 +12,8 @@ import Home from './components/Home.js';	//not use '''var Home = require('./comp
 
 module.exports = {
 	home: function(req, res){
-		var fileList = fs.readdirSync(__dirname);	//use sync to get the file list 
-		var markup = ReactDOMServer.renderToString(<Home fileList={fileList}/>);		//renderToString receives a ReactElement not a React Component
+		var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
+		var markup = ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname}/>);		//renderToString receives a ReactElement not a React Component
 
 		res.render('home', {
 			markup: markup
@@ -40,5 +40,9 @@ module.exports = {
 		}
 
 		// res.render('upload');
+	},
+	download: function(req, res){
+		var file = __dirname + '/asd.jpg';
+		res.download(file);
 	}
 }
