@@ -13,7 +13,7 @@ class Home extends React.Component {
 				<div>
 					<p id='file-name'>{file}</p>
 					<p>details</p>
-					<button><a href={'/download' + dir + '/' + file}>download</a></button>
+					<button><a href={'/download/' + file}>download</a></button>
 				</div>
 			);
 		});

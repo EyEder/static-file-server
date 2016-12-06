@@ -12,12 +12,17 @@ import Home from './components/Home.js';	//not use '''var Home = require('./comp
 
 module.exports = {
 	home: function(req, res){
-		var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
-		var markup = ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname}/>);		//renderToString receives a ReactElement not a React Component
-
-		res.render('home', {
-			markup: markup
+		// var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
+		var fileList = [];
+		client.keys('*', (err, list) => {
+			fileList = list;
+			res.render('home', 
+					{ markup: ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname} />) }
+				)
 		});
+		
+		// var markup = ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname}/>);		//renderToString receives a ReactElement not a React Component
+		// res.render('home', {markup: markup }); 
 	},
 	upload: function(req, res){
 
@@ -41,11 +46,14 @@ module.exports = {
 	    });
 			return;
 		}
-
-		// res.render('upload');
 	},
 	download: function(req, res){
-		var file = __dirname + '/asd.jpg';
-		res.download(file);
+		var filename = req.params.key;
+		client.hgetall(filename, (err, data) => {
+			if(err) throw err;
+			res.download(data.path);
+		});
+		// var file = '/tmp/upload_e57fc6c1f95f1c0c36bda0e96bbccef5';
+		// res.download(file);
 	}
 }
