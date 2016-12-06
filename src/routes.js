@@ -17,15 +17,12 @@ module.exports = {
 		client.keys('*', (err, list) => {
 			fileList = list;
 			res.render('home', 
-					{ markup: ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname} />) }
-				)
+					{ markup: ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname} />) }	
+					//renderToString receives a ReactElement rather than a React Component
+				);
 		});
-		
-		// var markup = ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname}/>);		//renderToString receives a ReactElement not a React Component
-		// res.render('home', {markup: markup }); 
 	},
 	upload: function(req, res){
-
 		if(req.url == '/upload' && req.method.toLowerCase() == 'post'){
 			var form = new formidable.IncomingForm();
 			form.parse(req, (err, fields, files) => {
@@ -34,13 +31,13 @@ module.exports = {
 	      res.write(util.inspect({fields: fields, files: files}));
 	      fs.readFile(files.upload.path,(err, data) => {
 	      	if(err) throw err;
-	      	client.hmset(files.upload.name, 
+	      	client.hmset(files.upload.name, 			//save file with a key in redis database
       			"description", fields.description, 
-      			"filesource", data.toString(),
+      			"filesource", data,
       			"path", files.upload.path );
-	      	client.hgetall(files.upload.name, function(err, data){
-	      		console.log(data.path);
-	      	});
+	      	// client.hgetall(files.upload.name, function(err, data){
+	      	// 	console.log(data.path);
+	      	// });
 	      });
 	      res.end();
 	    });
@@ -53,7 +50,5 @@ module.exports = {
 			if(err) throw err;
 			res.download(data.path);
 		});
-		// var file = '/tmp/upload_e57fc6c1f95f1c0c36bda0e96bbccef5';
-		// res.download(file);
 	}
 }
