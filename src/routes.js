@@ -29,9 +29,12 @@ module.exports = {
 	      res.write(util.inspect({fields: fields, files: files}));
 	      fs.readFile(files.upload.path,(err, data) => {
 	      	if(err) throw err;
-	      	client.set(files.upload.name, data);
-	      	client.get('asd.jpg',function(err, data){
-	      		console.log(data.toString());
+	      	client.hmset(files.upload.name, 
+      			"description", fields.description, 
+      			"filesource", data.toString(),
+      			"path", files.upload.path );
+	      	client.hgetall(files.upload.name, function(err, data){
+	      		console.log(data.path);
 	      	});
 	      });
 	      res.end();
