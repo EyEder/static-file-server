@@ -14,10 +14,17 @@ module.exports = {
 	home: function(req, res){
 		// var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
 		var fileList = [];
-		client.keys('*', (err, list) => {
+		var fileDesc = [];
+
+		client.keys('*', (err, list) => {	//get all files' name list
+			for(var file of list){
+				client.hgetall(file, (err, data) => {
+					fileDesc.push(data.description);
+				});
+			}
 			fileList = list;
 			res.render('home', 
-					{ markup: ReactDOMServer.renderToString(<Home fileList={fileList} dir={__dirname} />) }	
+					{ markup: ReactDOMServer.renderToString(<Home fileList={fileList} fileDesc={fileDesc} />) }	
 					//renderToString receives a ReactElement rather than a React Component
 				);
 		});
