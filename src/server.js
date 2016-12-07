@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 
 app.get('/', routes.home);
 
-app.post('/upload', routes.upload);
+app.post('/', routes.upload);
 
 app.get('/download/:key', routes.download);
 

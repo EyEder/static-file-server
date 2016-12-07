@@ -9,7 +9,7 @@ class UploadFile extends React.Component {
 	render(){
 		return(
 			//'enctype' must be replaced by 'encType'
-			<form action="/upload" encType="multipart/form-data" method="post">	
+			<form action="/" encType="multipart/form-data" method="post">	
 				<input type="text" name="description" placeholder="file description" />
 				<input type="file" name="upload" multiple="multiple" placeholder="upload file..." />
 				<input type="submit" value="upload" />
