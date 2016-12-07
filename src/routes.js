@@ -9,7 +9,7 @@ import Home from './components/Home.js';	//not use '''var Home = require('./comp
 import UploadFile from './components/UploadFile.js';
 
 module.exports = {
-	home: function(req, res){
+	home: (req, res) => {
 		// var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
 		var fileList = [];
 		var fileDesc = [];
@@ -32,7 +32,7 @@ module.exports = {
 			}
 		});
 	},
-	upload: function(req, res){
+	upload: (req, res) => {
 		if(req.method.toLowerCase() == 'post'){
 			var form = new formidable.IncomingForm();
 			form.parse(req, (err, fields, files) => {
@@ -47,11 +47,18 @@ module.exports = {
 	    });
 		}
 	},
-	download: function(req, res){
+	download: (req, res) => {
 		var filename = req.params.key;
 		client.hgetall(filename, (err, data) => {
 			if(err) throw err;
 			res.download(data.path, filename);
 		});
+	},
+	delete: (req, res) => {
+		var filename = req.params.key;
+		client.del(filename, (err) => {
+			if(err) throw err;
+			res.redirect('/');
+		})
 	}
 }

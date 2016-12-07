@@ -27,6 +27,8 @@ app.post('/', routes.upload);
 
 app.get('/download/:key', routes.download);
 
+app.get('/del/:key', routes.delete);
+
 app.listen(3000,function(){
 	console.log('listening at port 3000');
 });
