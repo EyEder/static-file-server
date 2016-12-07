@@ -57,7 +57,7 @@ module.exports = {
 		var filename = req.params.key;
 		client.hgetall(filename, (err, data) => {
 			if(err) throw err;
-			res.download(data.path);
+			res.download(data.path, filename);
 		});
 	}
 }
