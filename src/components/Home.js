@@ -15,7 +15,7 @@ class Home extends React.Component {
 			);
 		});
 		return (
-			<div>
+			<div id="homebox">
 				<UploadFile />
 				{fileList}
 			</div>
