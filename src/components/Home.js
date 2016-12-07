@@ -11,11 +11,6 @@ class Home extends React.Component {
 		var fileDesc = this.props.fileDesc;
 		var fileList = this.props.fileList.map((file, index) => {
 			return (
-				// <div>
-				// 	<p id='file-name'>{file}</p>
-				// 	<p>{fileDesc[index]}</p>
-				// 	<button><a href={'/download/' + file}>download</a></button>
-				// </div>
 				<File filename={file} description={fileDesc[index]} />
 			);
 		});
