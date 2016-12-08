@@ -38,6 +38,10 @@ module.exports = {
 			form.parse(req, (err, fields, files) => {
 	      fs.readFile(files.upload.path,(err, data) => {
 	      	if(err) throw err;
+	      	if(files.upload.size == 0) {
+	      		res.redirect('back');
+	      		return;
+	      	}
 	      	client.hmset(files.upload.name, 			//save file with a key in redis database
       			"description", fields.description, 
       			"filesource", data,

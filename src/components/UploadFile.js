@@ -1,4 +1,22 @@
 var React = require('react');
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const styles = {
+  button: {
+    margin: 12,
+  },
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+};
 
 class UploadFile extends React.Component {
 
@@ -10,8 +28,15 @@ class UploadFile extends React.Component {
 		return(
 			//'enctype' must be replaced by 'encType'
 			<form action="/" encType="multipart/form-data" method="post">	
-				<input type="text" name="description" placeholder="file description" />
-				<input type="file" name="upload" multiple="multiple" placeholder="upload file..." />
+				<TextField name="description" hintText="file description" />
+				<RaisedButton 
+					label="Choose a file"
+		      labelPosition="before"
+		      style={styles.button}
+		      containerElement="label"
+				>
+					<input type="file" name="upload" multiple="multiple" placeholder="upload file..." style={styles.exampleImageInput} />
+				</RaisedButton>
 				<input type="submit" value="upload" />
 			</form>
 		);

@@ -1,6 +1,11 @@
 var React = require('react');
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import UploadFile from './UploadFile.js';
 import File from './File.js';
+
+injectTapEventPlugin();
 
 class Home extends React.Component {
 	constructor(props){
@@ -11,14 +16,16 @@ class Home extends React.Component {
 		var fileDesc = this.props.fileDesc;
 		var fileList = this.props.fileList.map((file, index) => {
 			return (
-				<File filename={file} description={fileDesc[index]} />
+				<File filename={file} key={index} description={fileDesc[index]} />
 			);
 		});
 		return (
-			<div id="homebox">
-				<UploadFile />
-				{fileList}
-			</div>
+			<MuiThemeProvider muiTheme={getMuiTheme()}>
+				<div>
+					<UploadFile />
+					{fileList}
+				</div>
+			</MuiThemeProvider>
 		);
 	}
 }

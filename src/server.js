@@ -1,3 +1,4 @@
+global.navigator = { userAgent: 'all' };	//userAgent should be supplied in the muiTheme context for server-side rendering.
 const fs = require('fs');
 require('babel-register')({				// transpile jsx files for server side rendering in React
     presets: ['es2015', 'react']
