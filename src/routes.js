@@ -13,7 +13,6 @@ module.exports = {
 		// var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
 		var fileList = [];
 		var fileDesc = [];
-
 		client.keys('*', (err, list) => {	//get all files' name list
 			if(list.length == 0){	//if db is empty
 				res.render('home', { markup: ReactDOMServer.renderToString(<Home fileList={fileList} fileDesc={fileDesc} />) }	);
