@@ -1,4 +1,6 @@
-var React = require('react');
+import React from 'react';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class Filelist extends React.Component {
 	constructor(props){
@@ -7,12 +9,16 @@ class Filelist extends React.Component {
 	render(){
 		var filename = this.props.filename;
 		return(
-			<div>
-				<p className='file-name'>{filename}</p>
-				<p>{this.props.description}</p>
-				<button><a href={'/download/' + filename}>download</a></button>
-				<button><a href={'/del/' + filename}>remove</a></button>
-			</div>
+			<Card>
+			  <CardHeader
+			    title={filename} 
+			    subtitle={this.props.description} 
+			  />
+			  <CardActions>
+			    <FlatButton label="download" href={'/download/' + filename} />
+			    <FlatButton label="delete" href={'/del/' + filename} />
+			  </CardActions>
+			</Card>
 		);
 	}
 }

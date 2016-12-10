@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -37,7 +37,14 @@ class UploadFile extends React.Component {
 				>
 					<input type="file" name="upload" multiple="multiple" placeholder="upload file..." style={styles.exampleImageInput} />
 				</RaisedButton>
-				<input type="submit" value="upload" />
+				<RaisedButton 
+					label="upload"
+		      labelPosition="before"
+		      style={styles.button}
+		      containerElement="label"
+				>
+					<input type="submit" style={styles.exampleImageInput} />
+				</RaisedButton>
 			</form>
 		);
 	}

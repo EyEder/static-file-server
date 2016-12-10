@@ -4,16 +4,13 @@ require('babel-register')({				// transpile jsx files for server side rendering 
     presets: ['es2015', 'react']
 });
 var express = require('express');
+const app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')();
+
 var path = require('path');
 var exphbs = require('express-handlebars');
 var routes = require('./routes');
-
-var formidable = require('formidable'),
-    http = require('http'),
-    util = require('util');
-
-
-const app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
