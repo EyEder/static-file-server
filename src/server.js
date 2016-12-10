@@ -6,11 +6,15 @@ require('babel-register')({				// transpile jsx files for server side rendering 
 var express = require('express');
 const app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io')();
+var io = require('socket.io')(server);
 
 var path = require('path');
 var exphbs = require('express-handlebars');
 var routes = require('./routes');
+
+io.on('connection',()=>{
+	console.log('connected to socket.io');
+});
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
@@ -27,6 +31,6 @@ app.get('/download/:key', routes.download);
 
 app.get('/del/:key', routes.delete);
 
-app.listen(3000,function(){
+server.listen(3000,function(){
 	console.log('listening at port 3000');
 });
