@@ -5,6 +5,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import UploadFile from './UploadFile.js';
 import File from './File.js';
 
+var NProgress = require('nprogress');
+
 injectTapEventPlugin();
 
 class Home extends React.Component {

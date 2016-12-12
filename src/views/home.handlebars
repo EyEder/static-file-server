@@ -3,13 +3,21 @@
 <head>
 	<meta charset="utf-8">
 	<title>static file server</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="nprogress.css" />
+	<script type="text/javascript" src="nprogress.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io.connect('http://localhost:3000');	//with port number
 	</script>
 </head>
 <body>
-	<div id="home">{{{ markup }}}</div>
+	<!-- <div id="home"> -->
+	{{{ markup }}}
+	<!-- {{{ script }}} -->
+	<!-- </div> -->
+<!-- <script type="text/javascript">
+	NProgress.start();
+</script> -->
 </body>
 </html>
