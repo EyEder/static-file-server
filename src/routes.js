@@ -8,15 +8,11 @@ var redis = require('redis'),
 import Home from './components/Home.js';	//not use '''var Home = require('./components.Home')'''
 import UploadFile from './components/UploadFile.js';
 
-var NProgress = require('nprogress');
-
 module.exports = {
 	home: (req, res) => {
 		// var fileList = fs.readdirSync(__dirname);	//use sync to get the file list  
 		var fileList = [];
 		var fileDesc = [];
-		// res.write('<script>NProgress.start();</script>');
-		// res.write('<script>NProgress.start();</script>');
 		client.keys('*', (err, list) => {	//get all files' name list
 			if(list.length == 0){	//if db is empty
 				res.send(ReactDOMServer.renderToString(<Home fileList={fileList} fileDesc={fileDesc} />));
@@ -28,11 +24,8 @@ module.exports = {
 						fileList = list;
 						// res.send(ReactDOMServer.renderToString(<Home fileList={fileList} fileDesc={fileDesc} />) );
 						//renderToString receives a ReactElement rather than a React Component
-						// res.render('home', {markup: '<script>NProgress.start();</script>'});
-						// res.write('<script>NProgress.done();</script>');
 						res.render('home', {
 							markup: ReactDOMServer.renderToString(<Home fileList={fileList} fileDesc={fileDesc} />)
-							// script: '<script>NProgress.start();</script>'
 						});
 					}
 				});

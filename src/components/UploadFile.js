@@ -3,9 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
-  button: {
-    margin: 12,
-  },
+  button: {margin: 12, }, 
   exampleImageInput: {
     cursor: 'pointer',
     position: 'absolute',
@@ -16,6 +14,7 @@ const styles = {
     width: '100%',
     opacity: 0,
   },
+  form: {textAlign: 'center'}
 };
 
 class UploadFile extends React.Component {
@@ -27,7 +26,7 @@ class UploadFile extends React.Component {
 	render(){
 		return(
 			//'enctype' must be replaced by 'encType'
-			<form action="/" encType="multipart/form-data" method="post">	
+			<form action="/" encType="multipart/form-data" method="post" style={styles.form} >	
 				<TextField name="description" hintText="file description" />
 				<RaisedButton 
 					label="Choose a file"
